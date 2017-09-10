@@ -1,4 +1,19 @@
 language: go
+
 go:
-- '1.8'
-- '1.9'
+  - '1.8'
+  - '1.9'
+
+sudo: required
+services: docker
+
+script:
+  - GOARCH=amd64 GOOS=linux go build -o bin/pipeline-demo-linux-amd64 main.go
+  - docker build -t nicklanng/pipeline-demo .
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker tag $TRAVIS_REPO_SLUG $TRAVIS_REPO_SLUG:dev;
+    docker push $TRAVIS_REPO_SLUG:dev;
+    fi
