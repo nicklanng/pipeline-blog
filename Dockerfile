@@ -1,5 +1,5 @@
 FROM scratch
 
-ADD ./bin/pipeline-demo-linux-amd64 /pipeline-demo
+ADD ./bin/pipeline-blog-linux-amd64 /pipeline-blog
 
-CMD ["/pipeline-demo"]
+CMD ["/pipeline-blog"]

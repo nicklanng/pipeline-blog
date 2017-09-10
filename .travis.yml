@@ -8,8 +8,8 @@ sudo: required
 services: docker
 
 script:
-  - GOARCH=amd64 GOOS=linux go build -o bin/pipeline-demo-linux-amd64 main.go
-  - docker build -t nicklanng/pipeline-demo .
+  - GOARCH=amd64 GOOS=linux go build -o bin/pipeline-blog-linux-amd64 main.go
+  - docker build -t nicklanng/pipeline-blog .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
